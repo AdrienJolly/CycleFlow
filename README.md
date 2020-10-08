@@ -10,9 +10,9 @@ We provide an example of usage of the package in a Jupyter Notebook. In the note
 
 The example was generated with python version 3.8.5 and the following packages:
 
-pandas v1.1.2, 
-numpy v1.19.2, 
-emcee v3.0.2, 
-scipy v1.5.2, 
-corner v2.1.0, 
-numba v0.51.2.
+pandas v1.1.2
+numpy v1.19.2
+emcee v3.0.2
+scipy v1.5.2
+corner v2.1.0
+numba v0.51.2
