@@ -8,11 +8,16 @@ The package requires the python packages numba, numpy and scipy. It is meant to 
 
 We provide an example of usage of the package in a Jupyter Notebook. In the notebook we describe files required by CycleFlow and the steps to follow.
 
-The example was generated with python version 3.8.5 and the following packages:
-
+The example was generated with python version 3.8.5 and the following packages: 
+name
 pandas v1.1.2
+name
 numpy v1.19.2
+name
 emcee v3.0.2
+name
 scipy v1.5.2
+name
 corner v2.1.0
+name
 numba v0.51.2
