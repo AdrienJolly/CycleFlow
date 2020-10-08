@@ -11,7 +11,7 @@ We provide an example of usage of the package in a Jupyter Notebook. In the note
 The example was generated with python version 3.8.5 and the following packages: 
 
 | name  | version |  
-|-------|:-- ----:|
+|-------|:-------:|
 | pandas| v1.1.2  | 
 | numpy | v1.19.2 |  
 | emcee | v3.0.2  |  
