@@ -120,7 +120,7 @@ def model(t, y, transitions, theta, ss_fractions, kappa, labeling):
     return dldt2
 
 
-@jit('f8[:](f8,f8[:],f8[:,:],f8[:],f8[:],f8,f8[:,:])', nopython=True)
+@jit('f8[:](f8,f8[::1],f8[:,::1],f8[::1],f8[::1],f8,f8[:,::1])', nopython=True)
 def model_jit(t, y, transitions, theta, ss_fractions, kappa, labeling):
     '''ODE model for labeled cells
   
@@ -207,7 +207,7 @@ class log_likelihood:
             return -np.inf
         else:
             k = k.real
-            ss_fractions = eig[1][:, index].real 
+            ss_fractions = np.ascontiguousarray(eig[1][:, index].real)
             ss_fractions /= np.sum(ss_fractions)
             ss_G1, ss_S, ss_G2, ss_G0 = np.split(ss_fractions, [l, l+m, l+m+n])
             ss_earlyS, ss_midS, ss_lateS = np.split(ss_S, [earlyS, -lateS])
