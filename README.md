@@ -1,14 +1,15 @@
 # CycleFlow
 
-This is the Python package CycleFlow. It implements the  model of thymidine analogue progression through the cell cycle described in Jolly et al. (https://doi.org/10.1101/2020.09.10.291088)
+This is the Python package CycleFlow. It implements a method of the same name, which infers proliferative heterogeneity and cell cycle parameters based of thymidine analogue pulse-chase labeling data. The method is described in Jolly et al (https://doi.org/10.1101/2020.09.10.291088).
 
-The package requires the python packages numba, numpy and scipy. It is meant to be used with the package emcee which performs Monte Carlo Markov Chain sampling.
 
 ### Example
 
-We provide an example of usage of the package in a Jupyter Notebook. In the notebook we describe files required by CycleFlow and the steps to follow.
+We provide an example of usage of the package in the Jupyter Notebook `example/CycleFlowExample.ipynb`.
 
-The example was generated with python version 3.8.5 and the following packages: 
+### Prerequisites
+
+The package was tested with with python version 3.8.5 and the following packages: 
 
 | name  | version |  
 |-------|:-------:|
