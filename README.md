@@ -23,3 +23,7 @@ The package was tested with with python version 3.8.5 and the following packages
 ### Installation
 
 Download or clone the repository, install the prerequisites and then `python setup.py`.
+
+Alternatively, CyleFlow can be installed using pip `pip install CycleFlow`.
+
+
