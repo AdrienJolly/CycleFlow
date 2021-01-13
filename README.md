@@ -5,7 +5,7 @@ This is the Python package CycleFlow. It implements a method of the same name, w
 
 ### Example
 
-We provide an example of usage of the package in the Jupyter Notebook `example/CycleFlowExample.ipynb`.
+We provide an example of usage of the package in the Jupyter Notebook `cycleflow/example/CycleFlowExample.ipynb`.
 
 ### Prerequisites
 
@@ -22,7 +22,7 @@ The package was tested with with python version 3.8.5 and the following packages
 
 ### Installation
 
-Download or clone the repository, install the prerequisites and then `python setup.py`.
+Download or clone the repository, install the prerequisites and then `python setup.py install`.
 
 Alternatively, CyleFlow can be installed using pip `pip install CycleFlow`.
 
