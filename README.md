@@ -1,6 +1,6 @@
 # CycleFlow
 
-This is the Python package CycleFlow. It implements a method of the same name, which infers proliferative heterogeneity and cell cycle parameters based of thymidine analogue pulse-chase labeling data. The method is described in Jolly et al (https://doi.org/10.1101/2020.09.10.291088).
+This is the Python package CycleFlow. It implements a method of the same name, which infers proliferative heterogeneity and cell cycle parameters based on thymidine analogue pulse-chase labeling data. The method is described in Jolly et al (https://doi.org/10.1101/2020.09.10.291088).
 
 
 ### Example
@@ -9,7 +9,7 @@ We provide an example of usage of the package in the Jupyter Notebook `cycleflow
 
 ### Prerequisites
 
-The package was tested with with python version 3.8.5 and the following packages: 
+The package was tested with python version 3.8.5 and the following packages: 
 
 | name  | version |  
 |-------|:-------:|
