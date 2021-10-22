@@ -33,7 +33,7 @@ Cycleflow take as input 4 csv files:
 - a file containing the mean EdU positive G1, S and G2M fractions over time ("Tet21N.csv" in the example)
 and the respective standard errors of the mean. We suggest, for each cell cycle phase, to calculate a unique pooled variance for the different time points and then derive the standard errors for each time point from this pooled variance
 
--a file containing a set of parameter values to initiate the mcmc sampling ("InitThetaTet.csv",in the example)
+- a file containing a set of parameter values to initiate the mcmc sampling ("InitThetaTet.csv",in the example)
 
 - a file containing the mean steady state fraction in G1, S and G2M gate,("TetsteadyState.csv" in this example)
 
