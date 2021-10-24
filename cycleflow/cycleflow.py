@@ -85,17 +85,16 @@ def model(t, y, transitions, theta, ss_fractions, kappa, labeling):
     l = abs(int(theta[4]))  
     m = 15 # S substeps; fixed
     n = 15 # G2 substeps; fixed
-    eps_0 = theta[8] # intial EdU labeling rate; fixed
+    eps_0 = theta[8] # intial EdU labeling rate
     tau = theta[3] # EdU labeling time constant
     mu = theta[1] #transition rate 
     eps = eps_0 * np.exp(-t / tau)
+  
     # update of the labeling matrix
     # labeling is passed as a function argument 
     # and updated with low-level numpy functions for speed
     labeling_sub_2 = labeling[l:l+n, l:l+n]
-    labeling_sub_3 = labeling[l+1:l+n, l:l+n-1]
     np.fill_diagonal(labeling_sub_2, eps)
-    np.fill_diagonal(labeling_sub_3, 0)
     # ...slow version for checking correctness
     # labeling_sub_ = labeling[l:l+n,:] # .copy()
     # labeling_sub_[0,l] = alpha
@@ -117,7 +116,7 @@ def model(t, y, transitions, theta, ss_fractions, kappa, labeling):
     return dldt2
 
 
-@jit('f8[:](f8,f8[:],f8[:,:],f8[:],f8[:],f8,f8[:,:])', nopython=True)
+@jit('f8[:](f8,f8[::1],f8[:,::1],f8[::1],f8[::1],f8,f8[:,::1])', nopython=True)
 def model_jit(t, y, transitions, theta, ss_fractions, kappa, labeling):
     '''ODE model for labeled cells
   
@@ -136,19 +135,16 @@ def model_jit(t, y, transitions, theta, ss_fractions, kappa, labeling):
     l = abs(int(theta[4]))  
     m = 15 # S substeps; fixed
     n = 15 # G2 substeps; fixed
-    eps_0 = theta[8] # intial EdU labeling rate; fixed
+    eps_0 = theta[8] # intial EdU labeling rate
     tau = theta[3] # EdU labeling time constant
     mu = theta[1] #transition rate 
     eps = eps_0 * np.exp(-t / tau)
-    #beta = (eps * mu) / (eps + mu)
-    #alpha = (eps * eps) / (eps + mu)
+  
     # update of the labeling matrix
     # labeling is passed as a function argument 
     # and updated with low-level numpy functions for speed
     labeling_sub_2 = labeling[l:l+n, l:l+n]
-    labeling_sub_3 = labeling[l+1:l+n, l:l+n-1]
     np.fill_diagonal(labeling_sub_2, eps)
-    np.fill_diagonal(labeling_sub_3, 0)
     # ...slow version for checking correctness
     # labeling_sub_ = labeling[l:l+n,:] # .copy()
     # labeling_sub_[0,l] = alpha
@@ -160,7 +156,13 @@ def model_jit(t, y, transitions, theta, ss_fractions, kappa, labeling):
     # ... much more intuitive and not slower?!
     dldt2 = (transitions.dot(lbl_fractions) - kappa * lbl_fractions 
              - labeling.dot(lbl_fractions - ss_fractions))
-    
+    # compute the time derivative with direct calls to blas
+    # y = y.copy() # seems to be needed to prevent havoc
+    # dldt = transitions.dot(lbl_fractions)
+    # daxpy(x=lbl_fractions, a=-kappa.real, y=dldt)
+    # daxpy(x=ss_fractions.real, a=-1., y=lbl_fractions)
+    # dgemm(alpha=-1., a=labeling, b=lbl_fractions, c=dldt, beta=1., overwrite_c=1)
+    # assert np.isclose(dldt2, dldt).all()
     return dldt2
 
 
@@ -197,7 +199,7 @@ class log_likelihood:
             return -np.inf
         else:
             k = k.real
-            ss_fractions = eig[1][:, index].real 
+            ss_fractions = np.ascontiguousarray(eig[1][:, index].real)
             ss_fractions /= np.sum(ss_fractions)
             ss_G1, ss_S, ss_G2, ss_G0 = np.split(ss_fractions, [l, l+m, l+m+n])
             ss_earlyS, ss_midS, ss_lateS = np.split(ss_S, [earlyS, -lateS])
