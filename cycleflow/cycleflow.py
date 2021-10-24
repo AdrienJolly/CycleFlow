@@ -85,20 +85,16 @@ def model(t, y, transitions, theta, ss_fractions, kappa, labeling):
     l = abs(int(theta[4]))  
     m = 15 # S substeps; fixed
     n = 15 # G2 substeps; fixed
-    eps_0 = 5 # intial EdU labeling rate; fixed
+    eps_0 = theta[8] # intial EdU labeling rate
     tau = theta[3] # EdU labeling time constant
     mu = theta[1] #transition rate 
     eps = eps_0 * np.exp(-t / tau)
-    beta = (eps * mu) / (eps + mu)
-    alpha = (eps * eps) / (eps + mu)
   
     # update of the labeling matrix
     # labeling is passed as a function argument 
     # and updated with low-level numpy functions for speed
     labeling_sub_2 = labeling[l:l+n, l:l+n]
-    labeling_sub_3 = labeling[l+1:l+n, l:l+n-1]
-    np.fill_diagonal(labeling_sub_2, alpha)
-    np.fill_diagonal(labeling_sub_3, beta)
+    np.fill_diagonal(labeling_sub_2, eps)
     # ...slow version for checking correctness
     # labeling_sub_ = labeling[l:l+n,:] # .copy()
     # labeling_sub_[0,l] = alpha
@@ -139,20 +135,16 @@ def model_jit(t, y, transitions, theta, ss_fractions, kappa, labeling):
     l = abs(int(theta[4]))  
     m = 15 # S substeps; fixed
     n = 15 # G2 substeps; fixed
-    eps_0 = 5 # intial EdU labeling rate; fixed
+    eps_0 = theta[8] # intial EdU labeling rate
     tau = theta[3] # EdU labeling time constant
     mu = theta[1] #transition rate 
     eps = eps_0 * np.exp(-t / tau)
-    beta = (eps * mu) / (eps + mu)
-    alpha = (eps * eps) / (eps + mu)
   
     # update of the labeling matrix
     # labeling is passed as a function argument 
     # and updated with low-level numpy functions for speed
     labeling_sub_2 = labeling[l:l+n, l:l+n]
-    labeling_sub_3 = labeling[l+1:l+n, l:l+n-1]
-    np.fill_diagonal(labeling_sub_2, alpha)
-    np.fill_diagonal(labeling_sub_3, beta)
+    np.fill_diagonal(labeling_sub_2, eps)
     # ...slow version for checking correctness
     # labeling_sub_ = labeling[l:l+n,:] # .copy()
     # labeling_sub_[0,l] = alpha
