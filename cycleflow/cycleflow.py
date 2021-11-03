@@ -114,8 +114,8 @@ class log_likelihood:
     tdata   -- vector of time points
     data    -- vector, mean fractions to which the model is fitted, 
             generated with function convert_data()
-    dataerr -- vector, error of the means, generated with function \
-            TODO: THIS IS MISSING
+    dataerr -- vector, error of the means, generated with function convert_data()
+            
   
     The returned callable evaluates the likelihood as a function of theta. 
 
