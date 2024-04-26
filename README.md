@@ -2,7 +2,7 @@
 
 This is the Python package CycleFlow. It implements a method of the same name, which can be used to analyze flow cytometry time series data. 
 CycleFlow infers proliferative heterogeneity and cell cycle parameters based on thymidine analogue pulse-chase labeling. 
-The method is described in the paper [Jolly et al.]([https://doi.org/10.1101/2020.09.10.291088](https://doi.org/10.1016/j.crmeth.2022.100315).)
+The method is described in [Jolly et al.](https://doi.org/10.1016/j.crmeth.2022.100315)
 
 
 ### Prerequisites
